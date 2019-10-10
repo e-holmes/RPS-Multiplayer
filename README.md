@@ -13,4 +13,4 @@ Where can you get help?
 Report issues to apple@banana.com
 
 Who maintains and contributes to this project?\
-Apple Banana is the creater and maintenance team for RPS-Multiplayer.
+Apple Banana is the creater and maintenance team for RPS-Multiplayer
