@@ -1,0 +1,25 @@
+#p1_rock{
+    float:left;
+    width:100%;
+}
+#p1_paper{
+    float:left;
+    width:100%;
+}
+#p1_scissors{
+    float:left;
+    width:100%;
+}
+
+#p2_rock{
+    float:right;
+    width:100%;
+}
+#p2_paper{
+    float:right;
+    width:100%;
+}
+#p2_scissors{
+    float:right;
+    width:100%;
+}
