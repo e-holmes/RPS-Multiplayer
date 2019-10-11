@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>
-
-        </title>
+        <meta charset="utrf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Rock Paper Scissors: Multiplayer</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
-        
+        <div class="container">
+                <section class="row">
+                    <article class="col-12" id="banner_temp">
+                        Rock Paper Scissors: Multiplayer
+                    </article>
+                </section>
+
+                <section class="row">
+                    <article class="col-3" id="p1_score">
+
+                    </article>
+                    <article class="col-3" id="ties">
+
+                    </article>
+                    <article class="col-3" id="p2_score">
+
+                        </article>
+                </section>
+
+                <section class="row">
+                    <article class="col-4">
+
+                    </article>
+                </section>
+
+                <section class="row">
+                    <article class="col-3" id="player_one">
+                        <img src="assets/images/rock.gif" id="p1_rock" class="gif" value="0">
+                        <img src="assets/images/paper.gif" id="p1_paper" class="gif" value="1">
+                        <img src="assets/images/scissors.gif" id="p1_scissors" class="gif" value="2">
+                    </article>
+                    
+                    <article  class="col-3">
+
+                    </article>
+                    <article class="col-3">
+
+                    </article>
+
+                    <article class="col-3" id="player_two">
+                            <img src="assets/images/rock.gif" id="p2_rock" class="gif" value="0">
+                            <img src="assets/images/paper.gif" id="p2_paper" class="gif" value="1">
+                            <img src="assets/images/scissors.gif" id="p2_scissors" class="gif" value="2">
+    
+                    </article>
+                </section>
+            </div>
     </body>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="assets/javascript/app.js" ></script>
 </html>

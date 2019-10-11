@@ -4,12 +4,26 @@ var p1_losses=0;
 var p2_wins=0;
 var p2_losses=0;
 var ties=0;
-var player=0;
-var p1="r";
-var p2="s";
+var player=1;
+var p1="space";
+var p2="space";
 var option = ["r", "p", "s"];
 
-check();
+$(".gif").on("click", function(){
+        var value = $(this).attr("value");
+        console.log(value);
+
+        if (player == 1){
+            p1 = option[value];
+            console.log("Player 1 Chose: " +p1);
+            player++;
+        }else if (player == 2){
+            p2 = option[value];
+            console.log("Player 2 Chose: " +p2);
+            player++;
+            check();
+        }
+})
 
 function check(){
     if (player == 1){
