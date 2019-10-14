@@ -1,19 +1,32 @@
 $(document).ready(function(){
-var p1_wins=0;
-var p1_losses=0;
-var p2_wins=0;
-var p2_losses=0;
-var ties=0;
-var player=1;
-var p1="space";
-var p2="space";
-var option = ["r", "p", "s"];
-var score;
+    var firebaseConfig = {
+        apiKey: "AIzaSyA46Hob913lpOKkBAh0B_9Ow1Th01Zz-ds",
+        authDomain: "rpsmp-5d14a.firebaseapp.com",
+        databaseURL: "https://rpsmp-5d14a.firebaseio.com",
+        projectId: "rpsmp-5d14a",
+        storageBucket: "rpsmp-5d14a.appspot.com",
+        messagingSenderId: "283055892707",
+        appId: "1:283055892707:web:d7f470d314a69520edbdd6"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
 
-logPlayer();
-logScore();
+    var database = firebase.database();
+    var p1_wins=0;
+    var p1_losses=0;
+    var p2_wins=0;
+    var p2_losses=0;
+    var ties=0;
+    var player=1;
+    var p1="space";
+    var p2="space";
+    var option = ["r", "p", "s"];
+    var score;
 
-$(".gif").on("click", function(){
+    logPlayer();
+    logScore();
+
+    $(".gif").on("click", function(){
         var value = $(this).attr("value");
         console.log(value);
 
@@ -28,12 +41,25 @@ $(".gif").on("click", function(){
             player++;
             check();
             logPlayer();
+            
+            database.ref().set({
+            p1_wins: p1_wins
+            });
+            database.ref().set({
+            p1_losses: p1_losses
+            });
+            database.ref().set({
+            p2_wins: p2_wins
+            });
+            database.ref().set({
+            ties: ties
+            });
         }
-})
+    })
 
 
 
-function check(){
+    function check(){
         // compare user inputs
         if(p1 === p2){
             // update ties and reset
@@ -51,18 +77,18 @@ function check(){
             p1_losses++;
         }
         logScore();
-};
+    };
 
-function reset(){
+    function reset(){
     p1="space";
     p2="space";
     player=1;
     var score = "p1_wins: " +p1_wins +" p2_wins: " +p2_wins +" p1_losses: " +p1_losses +" p2_losses: " +p2_losses +" tie count: " +ties;
     console.log(score);
     $("#btn").empty();
-}
+    }
 
-function logPlayer(){
+    function logPlayer(){
     var instruct = $("<h2>");
 
     if (player == 1){
@@ -86,13 +112,11 @@ function logPlayer(){
         $("#btn").append("<button class='btn col-2'> Rematch! </button");
         $(".btn").on("click", function(){
             reset();
-         })
+            })
     }
-    
+    };
 
-
-};
-function logScore(){
+    function logScore(){
     var scoreCount = $("<h1>");
     $("#p1_score").empty();
     scoreCount.append("Wins: " +p1_wins +"</h1>");
@@ -111,6 +135,6 @@ function logScore(){
     var scoreCount = $("<h1>");
     scoreCount.append("Ties: " +ties +"</h1>");
     $("#ties").append(scoreCount);
-};
+    };
 
-});
+    });
