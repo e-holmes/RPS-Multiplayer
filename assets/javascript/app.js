@@ -31,25 +31,24 @@ $(".gif").on("click", function(){
         }
 })
 
+
+
 function check(){
         // compare user inputs
         if(p1 === p2){
             // update ties and reset
             score = "No One Wins!";
             ties= ties+1;
-            reset();
         } else if(p1==="r" && p2==="s" || p1==="s" && p2==="p" || p1==="p" && p2==="r"){
             // update score and reset
             score = "Player One Wins!";
             p1_wins++;
             p2_losses++;
-            reset();
         } else if(p2==="r" && p1==="s" || p2==="s" && p1==="p" || p2==="p" && p1==="r"){
             // update score and reset
             score = "Player Two Wins!";
             p2_wins++;
             p1_losses++;
-            reset();
         }
         logScore();
 };
@@ -60,6 +59,7 @@ function reset(){
     player=1;
     var score = "p1_wins: " +p1_wins +" p2_wins: " +p2_wins +" p1_losses: " +p1_losses +" p2_losses: " +p2_losses +" tie count: " +ties;
     console.log(score);
+    $("#btn").empty();
 }
 
 function logPlayer(){
@@ -81,8 +81,14 @@ function logPlayer(){
         $("#instruction").empty();
         instruct.append(score);
         instruct.append("</h2>")
-        $("#instruction").append($player);
+        $("#instruction").append(instruct);
+        // Button pops
+        $("#btn").append("<button class='btn col-2'> Rematch! </button");
+        $(".btn").on("click", function(){
+            reset();
+         })
     }
+    
 
 
 };
