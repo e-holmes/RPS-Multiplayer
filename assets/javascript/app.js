@@ -11,7 +11,7 @@ $(document).ready(function(){
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 
-    var database = firebase.database();
+    
     var p1_wins=0;
     var p1_losses=0;
     var p2_wins=0;
@@ -41,19 +41,6 @@ $(document).ready(function(){
             player++;
             check();
             logPlayer();
-            
-            database.ref().set({
-            p1_wins: p1_wins
-            });
-            database.ref().set({
-            p1_losses: p1_losses
-            });
-            database.ref().set({
-            p2_wins: p2_wins
-            });
-            database.ref().set({
-            ties: ties
-            });
         }
     })
 
@@ -77,6 +64,7 @@ $(document).ready(function(){
             p1_losses++;
         }
         logScore();
+        fireUpdate();
     };
 
     function reset(){
@@ -136,5 +124,25 @@ $(document).ready(function(){
     scoreCount.append("Ties: " +ties +"</h1>");
     $("#ties").append(scoreCount);
     };
+
+    function fireUpdate(){
+        var scoreRef = firebase.database().ref("score/");
+
+        scoreRef.set ({
+            player1:{
+                wins: p1_wins,
+                losses: p1_losses
+            },
+
+            player2:{
+                wins: p2_wins,
+                losses: p2_losses
+            },
+            ties:{
+                ties
+            }
+        })
+        
+    }
 
     });
