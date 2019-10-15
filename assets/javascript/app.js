@@ -11,7 +11,7 @@ $(document).ready(function(){
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
 
-    
+
     var p1_wins=0;
     var p1_losses=0;
     var p2_wins=0;
@@ -23,8 +23,44 @@ $(document).ready(function(){
     var option = ["r", "p", "s"];
     var score;
 
+
+    firebase.database().ref().on("value", function(snapshot) {
+        console.log(snapshot.val());
+        p1_wins= snapshot.val().score.player1.wins;
+        console.log("Player 1 Wins: "+p1_wins);
+        p1_losses = snapshot.val().score.player1.losses;
+        console.log("Player 1 losses: "+p1_losses);
+        p2_wins= snapshot.val().score.player2.wins;
+        console.log("Player 2 Wins: "+p2_wins);
+        p2_losses= snapshot.val().score.player2.losses;
+        console.log("Player 2 losses: "+p2_losses);
+        ties= snapshot.val().score.ties.ties;
+        console.log("Ties: "+ties);
+
+        var scoreCount = $("<h1>");
+        $("#p1_score").empty();
+        scoreCount.append("Wins: " +p1_wins +"</h1>");
+        scoreCount.append("<br>");
+        scoreCount.append("</h1> Losses: " +p1_losses +"</h1>");
+        $("#p1_score").append(scoreCount);
+
+        $("#p2_score").empty();
+        var scoreCount = $("<h1>");
+        scoreCount.append("Wins: " +p2_wins +"</h1>");
+        scoreCount.append("<br>");
+        scoreCount.append("</h1> Losses: " +p2_losses +"</h1>");
+        $("#p2_score").append(scoreCount);
+
+        $("#ties").empty();
+        var scoreCount = $("<h1>");
+        scoreCount.append("Ties: " +ties +"</h1>");
+        $("#ties").append(scoreCount);
+      }, function(errorObject) {
+        console.log("The read failed: " + errorObject.code);
+    });
+
     logPlayer();
-    logScore();
+
 
     $(".gif").on("click", function(){
         var value = $(this).attr("value");
@@ -105,24 +141,24 @@ $(document).ready(function(){
     };
 
     function logScore(){
-    var scoreCount = $("<h1>");
-    $("#p1_score").empty();
-    scoreCount.append("Wins: " +p1_wins +"</h1>");
-    scoreCount.append("<br>");
-    scoreCount.append("</h1> Losses: " +p1_losses +"</h1>");
-    $("#p1_score").append(scoreCount);
+        var scoreCount = $("<h1>");
+        $("#p1_score").empty();
+        scoreCount.append("Wins: " +p1_wins +"</h1>");
+        scoreCount.append("<br>");
+        scoreCount.append("</h1> Losses: " +p1_losses +"</h1>");
+        $("#p1_score").append(scoreCount);
 
-    $("#p2_score").empty();
-    var scoreCount = $("<h1>");
-    scoreCount.append("Wins: " +p2_wins +"</h1>");
-    scoreCount.append("<br>");
-    scoreCount.append("</h1> Losses: " +p2_losses +"</h1>");
-    $("#p2_score").append(scoreCount);
+        $("#p2_score").empty();
+        var scoreCount = $("<h1>");
+        scoreCount.append("Wins: " +p2_wins +"</h1>");
+        scoreCount.append("<br>");
+        scoreCount.append("</h1> Losses: " +p2_losses +"</h1>");
+        $("#p2_score").append(scoreCount);
 
-    $("#ties").empty();
-    var scoreCount = $("<h1>");
-    scoreCount.append("Ties: " +ties +"</h1>");
-    $("#ties").append(scoreCount);
+        $("#ties").empty();
+        var scoreCount = $("<h1>");
+        scoreCount.append("Ties: " +ties +"</h1>");
+        $("#ties").append(scoreCount);
     };
 
     function fireUpdate(){
@@ -141,8 +177,32 @@ $(document).ready(function(){
             ties:{
                 ties
             }
-        })
-        
+        })  
+    }
+
+    function fireFetch(){
+        database.ref().on("value", function(snapshot) {
+            // We are now inside our .on function...
+          
+            // Console.log the "snapshot" value (a point-in-time representation of the database)
+            console.log(snapshot.val());
+            // This "snapshot" allows the page to get the most current values in firebase.
+          
+            // Change the value of our clickCounter to match the value in the database
+            clickCounter = snapshot.val().clickCount;
+          
+            // Console Log the value of the clickCounter
+            console.log(clickCounter);
+          
+            // Change the HTML using jQuery to reflect the updated clickCounter value
+            $("#click-value").text(clickCounter);
+            // Alternate solution to the above line
+            // $("#click-value").html(clickCounter);
+          
+          // If any errors are experienced, log them to console.
+          }, function(errorObject) {
+            console.log("The read failed: " + errorObject.code);
+          });
     }
 
     });
