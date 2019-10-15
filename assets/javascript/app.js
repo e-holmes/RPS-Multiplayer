@@ -179,30 +179,4 @@ $(document).ready(function(){
             }
         })  
     }
-
-    function fireFetch(){
-        database.ref().on("value", function(snapshot) {
-            // We are now inside our .on function...
-          
-            // Console.log the "snapshot" value (a point-in-time representation of the database)
-            console.log(snapshot.val());
-            // This "snapshot" allows the page to get the most current values in firebase.
-          
-            // Change the value of our clickCounter to match the value in the database
-            clickCounter = snapshot.val().clickCount;
-          
-            // Console Log the value of the clickCounter
-            console.log(clickCounter);
-          
-            // Change the HTML using jQuery to reflect the updated clickCounter value
-            $("#click-value").text(clickCounter);
-            // Alternate solution to the above line
-            // $("#click-value").html(clickCounter);
-          
-          // If any errors are experienced, log them to console.
-          }, function(errorObject) {
-            console.log("The read failed: " + errorObject.code);
-          });
-    }
-
-    });
+});
